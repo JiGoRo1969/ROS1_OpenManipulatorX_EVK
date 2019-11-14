@@ -1,0 +1,18 @@
+<launch>
+  <!-- We resume the logic in empty_world.launch, changing only the name of the world to be launched -->
+  <include file="$(find gazebo_ros)/launch/empty_world.launch">
+    <arg name="world_name" value="$(find open_manipulator_evk_gazebo)/worlds/open_manipulator.world"/>
+    <!-- more default parameters can be changed here -->
+  </include>
+
+  <arg name="model" default="$(find open_manipulator_evk_description)/urdf/open_manipulator.urdf" />
+  <arg name="gui" default="True" />
+  <param name="robot_description" textfile="$(arg model)" />
+  <param name="use_gui" value="$(arg gui)"/>
+  <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher" />
+  <node name="robot_state_publisher" pkg="robot_state_publisher" type="state_publisher" />
+
+  <param name="robot_description" type="str" textfile="$(find open_manipulator_evk_description)/urdf/open_manipulator.urdf" />
+
+  <node name="spawn_urdf" pkg="gazebo_ros" type="spawn_model" args="-param robot_description -urdf -model open_manipulator_evk" />
+</launch>

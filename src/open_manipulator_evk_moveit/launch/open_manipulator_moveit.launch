@@ -1,0 +1,29 @@
+<launch>
+  <!-- gazebo -->
+  <include file="$(find open_manipulator_evk_gazebo)/launch/open_manipulator.launch" />
+
+  <!-- Load the URDF, SRDF and other .yaml configuration files on the param server -->
+  <include file="$(find open_manipulator_evk_moveit)/launch/planning_context.launch">
+    <arg name="load_robot_description" value="true"/>
+  </include>
+
+  <!-- controller -->
+  <rosparam file="$(find open_manipulator_evk_moveit)/config/trajectory_control.yaml" command="load"/>
+  <node name="open_manipulator_controller_spawner" pkg="controller_manager" type="spawner" respawn="false" output="screen" ns="/open_manipulator" args="open_manipulator_joint_controller joint_state_controller"/>
+
+  <!-- MoveIt -->
+  <include file="$(find open_manipulator_evk_moveit)/launch/move_group.launch">
+    <arg name="publish_monitored_planning_scene" value="true" />
+    <arg name="allow_trajectory_execution" value="true"/>
+    <arg name="fake_execution" value="false"/>
+    <arg name="info" value="true"/>
+    <arg name="debug" value="false"/>
+  </include>
+
+  <!-- Rviz and load the default config to see the state of the move_group node -->
+  <include file="$(find open_manipulator_evk_moveit)/launch/moveit_rviz.launch">
+    <arg name="config" value="true"/>
+    <arg name="debug" value="false"/>
+  </include>
+</launch>
+

@@ -1,0 +1,23 @@
+open_manipulator_evk:
+  joint_state_controller:
+    type: joint_state_controller/JointStateController
+    publish_rate: 50
+
+  open_manipulator_evk_joint_controller:
+    type: "position_controllers/JointTrajectoryController"
+    joints:
+      - joint1
+      - joint2
+      - joint3
+      - joint4
+      - gripper
+      - gripper_sub
+
+    gains:
+      joint1: {p: 100.0, i: 0.01, d: 10.0}
+      joint2: {p: 100.0, i: 0.01, d: 10.0}
+      joint3: {p: 100.0, i: 0.01, d: 10.0}
+      joint4: {p: 100.0, i: 0.01, d: 10.0}
+      gripper: {p: 100.0, i: 0.01, d: 10.0}
+      gripper_sub: {p: 100.0, i: 0.01, d: 10.0}
+
