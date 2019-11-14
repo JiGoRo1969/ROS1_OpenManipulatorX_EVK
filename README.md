@@ -106,7 +106,7 @@ https://github.com/JiGoRo1969/ROS2_RZA2M_MoveIt1/archive/master.zip
 Input the commands below into a terminal.  
 ```
 $ cd ~
-$ git clone -b v1.1.0 https://github.com/eProsima/Micro-XRCE-DDS-Agent
+$ git clone -b v1.1.0 https://github.com/JiGoRo1969/Micro-XRCE-DDS-Agent
 $ cd Micro-XRCE-DDS-Agent
 $ git submodule update --init --recursive
 ```
